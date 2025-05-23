@@ -8,11 +8,27 @@ let lightbox;
 export function createGallery(images) {
   const markup = images
     .map(
-      ({ webformatURL, largeImageURL, tags }) => `
-    <a href="${largeImageURL}" class="gallery-item">
-      <img src="${webformatURL}" alt="${tags}" />
-    </a>
-  `
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `
+      <li class="gallery-card">
+        <a href="${largeImageURL}" class="gallery-item">
+          <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        </a>
+        <div class="info">
+          <p><b>Likes:</b> ${likes}</p>
+          <p><b>Views:</b> ${views}</p>
+          <p><b>Comments:</b> ${comments}</p>
+          <p><b>Downloads:</b> ${downloads}</p>
+        </div>
+      </li>
+    `
     )
     .join('');
 

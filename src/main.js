@@ -13,6 +13,7 @@ const form = document.querySelector('.form');
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const query = e.target.elements['search-text'].value.trim();
+  console.log('Введене значення користувача:', query);
 
   if (!query) {
     iziToast.warning({
@@ -27,6 +28,8 @@ form.addEventListener('submit', async e => {
 
   try {
     const data = await getImagesByQuery(query);
+    console.log('Отримано зображень:', data.hits.length);
+
     hideLoader();
 
     if (data.hits.length === 0) {
@@ -40,6 +43,7 @@ form.addEventListener('submit', async e => {
     }
   } catch (error) {
     hideLoader();
+    console.error('Axios помилка:', error);
     iziToast.error({
       message: 'Something went wrong. Please try again later.',
       position: 'topRight',
